@@ -11,7 +11,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TasksScreen(),
+      home: Scaffold(
+        body: TasksScreen()
+      ),
     );
   }
 }
