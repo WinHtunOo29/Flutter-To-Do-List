@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_to_do_list/components/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -31,7 +32,7 @@ class TasksScreen extends StatelessWidget {
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
                   child: Icon(
@@ -40,10 +41,10 @@ class TasksScreen extends StatelessWidget {
                     size: 40.0,
                   ),
                 ), 
-                const SizedBox(
+                SizedBox(
                   height: 10.0,
                 ), 
-                const Text(
+                Text(
                   'Todoey',
                   style: TextStyle(
                     color: Colors.white,
@@ -51,7 +52,7 @@ class TasksScreen extends StatelessWidget {
                     fontWeight: FontWeight.w700
                   ),
                 ),
-                const Text(
+                Text(
                   '12 Tasks',
                   style: TextStyle(
                     color: Colors.white,
@@ -63,6 +64,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -70,6 +72,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
+              child: const TasksList(),
             ),
           ),
         ],
