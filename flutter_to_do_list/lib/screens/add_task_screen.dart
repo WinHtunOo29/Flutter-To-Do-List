@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
+  final Function addTaskCallback;
+
+  const AddTaskScreen({super.key, required this.addTaskCallback});
 
   @override
   Widget build(BuildContext context) {
+    String? newTextTitle;
+
     return SingleChildScrollView(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
@@ -22,8 +25,8 @@ class AddTaskScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(      
                   borderSide: BorderSide(color: Colors.lightBlueAccent, width: 5.0),   
                 ), 
@@ -33,12 +36,18 @@ class AddTaskScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
               autofocus: true,
+              onChanged: (newText) {
+                newTextTitle = newText;
+              },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: TextButton(
                 onPressed: () {
-      
+                  if (newTextTitle?.isNotEmpty ?? false) {
+                    addTaskCallback(newTextTitle);
+                    Navigator.pop(context);
+                  }
                 }, 
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all<Color>(Colors.lightBlueAccent),
