@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_to_do_list/models/task_data.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function addTaskCallback;
-
-  const AddTaskScreen({super.key, required this.addTaskCallback});
+  const AddTaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String? newTextTitle;
+    String? newTaskTitle;
 
     return SingleChildScrollView(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -37,16 +37,18 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               autofocus: true,
               onChanged: (newText) {
-                newTextTitle = newText;
+                newTaskTitle = newText;
               },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: TextButton(
                 onPressed: () {
-                  if (newTextTitle?.isNotEmpty ?? false) {
-                    addTaskCallback(newTextTitle);
+                  if (newTaskTitle != null) {
+                    Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle!);
                     Navigator.pop(context);
+                  } else {
+                    return;
                   }
                 }, 
                 style: ButtonStyle(
